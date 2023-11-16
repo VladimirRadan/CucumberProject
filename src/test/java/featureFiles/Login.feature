@@ -1,9 +1,18 @@
 Feature: Login into account
 
+  Scenario: Login into account with valid credentials
+    Given I'm on login page of herokuapp website
+    And I entered valid username "tomsmith" and password "SuperSecretPassword!"
+    When I click the login button
+    Then I should be taken to the login welcome page
 
-  Scenario: Login into account with correct credentials
-    Given User navigates to herokuapp website
-    And User enters valid username
-    And User enters valid password
-    When User clicks on the login button
-    Then User should be taken to the welcome login page
+  Scenario Outline: Login into account with invalid credentials
+    Given I'm on login page of herokuapp website
+    And I entered invalid username "<username>" and password "<password>"
+    When I click the login button
+    Then I should see error message
+    Examples:
+      | username  | password  |
+      | ''        | ''        |
+      | username1 | password1 |
+      | username2 | password2 |
